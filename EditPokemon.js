@@ -13,6 +13,8 @@ const EditPokemon = ({navigation,route}) => {
     const [type,setType] = useState(route.params.type);
     const [newName, setNewName] = useState("");
     const [newType, setNewType] = useState("");
+    const [image,setImageUrl] = useState("")
+    const [Number,setNumber] = useState("");
 
     function Edit(){
         if (name == ""  ) {
@@ -27,6 +29,16 @@ const EditPokemon = ({navigation,route}) => {
             return Alert.alert("Please enter Type!");
         }
 
+        if (image == ""){
+            return Alert.alert("Please enter Image!");
+        }
+
+
+        if (Number == "") {
+            return Alert.alert("Please enter Number!");
+        }
+
+
 
 
         const existingTitle = pokemon.find(data => data.title === type);
@@ -34,6 +46,8 @@ const EditPokemon = ({navigation,route}) => {
             const existingLetter = existingTitle.data.find(data => data["name"] == name)
             if (existingLetter) {
                 existingLetter.name = newName
+                existingLetter.imageUrl = image
+                existingLetter.number = Number
 
                 const AnotherType = pokemon.find(data => data.title === newType);
 
@@ -67,6 +81,13 @@ const EditPokemon = ({navigation,route}) => {
             <TextInput value={name}  placeholder={"Letter to edit"} style={{borderWidth : 2}} onChangeText={(value) => setName(value)}></TextInput>
             <Text>New Name for pokemon:</Text>
             <TextInput  placeholder={"new Letter"} style={{borderWidth : 2}} onChangeText={(value) => setNewName(value)}></TextInput>
+
+            <Text>Image Url:</Text>
+            <TextInput  placeholder={"Add image url"} style={{borderWidth : 2}} onChangeText={(value) => setImageUrl(value)}></TextInput>
+
+            <Text>Num:</Text>
+            <TextInput  placeholder={"Add Number"} style={{borderWidth : 2}} onChangeText={(value) => setNumber(value)}></TextInput>
+
 
             <Text>New type:</Text>
             <Picker  onValueChange={(value) => setNewType(value)}>
